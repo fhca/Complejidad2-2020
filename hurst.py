@@ -15,7 +15,7 @@ def hurst(x):
     for ven in ventanas:
         v = int(2**ven)
         r = np.max(z[:v])-np.min(z[:v])  # 4
-        s = np.std(y[:v])  # 5
+        s = np.std(x[:v])  # 5
         e[i] = r/s
         i += 1
     return np.polyfit(ventanas, np.log2(e), 1)[0]  # 6
