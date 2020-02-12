@@ -13,6 +13,7 @@ A = np.array([np.cos(angulos), np.sin(angulos)]).T
 # R = A[[1, 2, 0, 1, 0, 1, 2, 1, 0, 2, ...]]
 
 # j = np.random.randint(0, m, N) # azar = donita
+# descomprimir antes PCM.zip
 yi = np.loadtxt("ruidos/PCM90SUE_O1.txt")
 print(f"N={yi.size}")
 ymin = yi.min()
