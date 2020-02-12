@@ -19,7 +19,7 @@ print(f"N={yi.size}")
 ymin = yi.min()
 ymax = yi.max()
 
-j = ((yi-ymin)/(ymax-ymin) * m).astype(int)-1
+j = ((yi-ymin)/(ymax-ymin) * m).astype(int) - 1
 
 R = A[j]
 
