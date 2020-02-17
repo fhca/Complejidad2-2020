@@ -8,3 +8,5 @@ Curso de Complejidad 2 / SC2 en la UACM 2020
 ## Ejercicios
 *Los ejercicios son recomendable hacerlos, aunque no tienes que entregarlos.*
 1. Leer sobre el color del ruido y su significado para Series de Tiempo
+2. Leer el artículo *Modelos basados en agentes para la simulación de Sistemas Complejos Sociales*, de Arezky H. Rodríguez.
+3. Leer el libro *An introduction to Agent-Based Modeling* de Uri Wilensky y William Rand.
