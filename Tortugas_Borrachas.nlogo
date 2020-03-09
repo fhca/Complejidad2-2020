@@ -1,52 +1,50 @@
-patches-own [clientes]
-globals [colas]
-
 to setup
-  ca
-  set-default-shape clientes "person"
-  set colas n-of patches
-  reset-ticks
+  ca  ; abrev. de clear-all ; borra variables, mundo, etc.
+  crt cuantas-tortugas
+  reset-ticks ; borra contador de ticks (iteraciones)
 end
 
-to entra_cliente
-  let menor min-one-of colas [clientes]
-  ask menor [
-    set clientes clientes + 1
+to go
+  ask turtles [  ; abrev. de create-turtles
+    rt random 360 ; gira
+    fd 1 ; avanza
   ]
+  tick
 end
+
 @#$#@#$#@
 GRAPHICS-WINDOW
 210
 10
-647
-448
+620
+421
 -1
 -1
-13.0
+2.0
 1
 10
 1
 1
 1
 0
+0
 1
 1
+-100
+100
+-100
+100
 1
-0
-32
-0
-32
-0
-0
+1
 1
 ticks
 30.0
 
 BUTTON
-12
-7
-78
-40
+33
+70
+99
+103
 NIL
 setup
 NIL
@@ -59,35 +57,62 @@ NIL
 NIL
 1
 
-SLIDER
-13
-74
-185
-107
-clientes_por_tick
-clientes_por_tick
-0
-100
-50.0
-1
-1
+BUTTON
+36
+105
+99
+138
 NIL
-HORIZONTAL
+go
+T
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
 
-SLIDER
-13
-41
-185
-74
-ncolas
-ncolas
+INPUTBOX
+32
+10
+181
+70
+cuantas-tortugas
+10000.0
 1
-33
-1.0
+0
+Number
+
+MONITOR
+25
+158
+144
+203
+dist prom al (0,0)
+sum [distancexy 0 0] of turtles / cuantas-tortugas
+4
 1
-1
+11
+
+PLOT
+15
+235
+215
+385
+distancia promedio al (0,0)
 NIL
-HORIZONTAL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -16777216 true "" "plot sum [distancexy 0 0] of turtles / cuantas-tortugas"
 
 @#$#@#$#@
 ## WHAT IS IT?

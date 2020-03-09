@@ -1,3 +1,4 @@
 *.pages
 *.numbers
 .DS_Store
+.tmp.nlogo
