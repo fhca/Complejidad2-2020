@@ -14,6 +14,7 @@ to setup
   set-default-shape depredadores "wolf"
   set rapidas-angulo-de-vision 90
   set lentas-angulo-de-vision 170
+  set depredador-angulo-de-vision 70
   crea-presas
   crea-depredadores
   reset-ticks
@@ -61,6 +62,21 @@ to presa-detecta-depredador
     ]
   ]
 end
+
+to presas-lentas-se-juntan
+  ;lo estan trabajando Luis, Francisco, Carlos Javier
+end
+
+to presas-rapidas-huyen
+  ;lo estan trabajando Anel, Javier, Mauricio, Dalila, Toño
+end
+
+to mueve-depredadores
+  ask depredadores [
+    if depredador-detecta-presa
+  ]
+end
+
   ; Todas las presas deambulan lentamente cerca de donde surgen, corta visión
   ; lentas: si detectan depredador cerca, se agrupan
   ; rapidas: si detectan depredador cerca, corren, se cansan
