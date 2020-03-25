@@ -82,7 +82,8 @@ to-report potencial-comida
   ;devuelve una presa detectada por ESTE depredador en su cono de vision que esté "solitaria"
   let presas turtles with [color = green or color = violet]
   let presas-disponibles presas in-cone 4 depredador-angulo-de-vision
-  ask presas-disponibles [
+
+ask presas-disponibles [
     if not any? presas in-radius 1 [
       report self  ; está solitaria y la reporta
     ]
@@ -93,12 +94,15 @@ end
 to mueve-depredadores
   ask depredadores [
     let objetivo potencial-comida
-    face objetivo
-    fd paso-depredador
-    if distance objetivo < depredador-considera-cerca [
-      ask objetivo [
-        die
+    if objetivo != nobody [
+      face objetivo
+      fd paso-depredador
+      if distance objetivo < depredador-considera-cerca [
+        ask objetivo [
+          die  ; se lo come
+        ]
       ]
+    ]
   ]
 end
 
