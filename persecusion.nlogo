@@ -1,12 +1,19 @@
 breed [depredadores depredador]
 breed [presas-lentas presa-lenta]
 breed [presas-rapidas presa-rapida]
+globals [
+  rapidas-angulo-de-vision
+  lentas-angulo-de-vision
+]
+
 
 to setup
   ca
   set-default-shape presas-rapidas "rabbit"
   set-default-shape presas-lentas "cow"
   set-default-shape depredadores "wolf"
+  set rapidas-angulo-de-vision 90
+  set lentas-angulo-de-vision 170
   crea-presas
   crea-depredadores
   reset-ticks
@@ -42,6 +49,18 @@ end
 to go
 end
 
+to presa-detecta-depredador
+  ask presas-lentas [
+    if any? depredadores in-cone 2 lentas-angulo-de-vision [
+      presas-lentas-se-juntan
+    ]
+  ]
+  ask presas-rapidas [
+    if any? depredadores in-cone 2 rapidas-angulo-de-vision [
+      presas-rapidas-huyen
+    ]
+  ]
+end
   ; Todas las presas deambulan lentamente cerca de donde surgen, corta visión
   ; lentas: si detectan depredador cerca, se agrupan
   ; rapidas: si detectan depredador cerca, corren, se cansan
