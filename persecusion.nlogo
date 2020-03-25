@@ -55,6 +55,7 @@ to crea-depredadores
 end
 
 to go
+  mueve-depredadores
 end
 
 to presa-detecta-depredador
@@ -80,8 +81,8 @@ end
 
 to-report potencial-comida
   ;devuelve una presa detectada por ESTE depredador en su cono de vision que esté "solitaria"
-  let presas turtles with [color = green or color = violet]
-  let presas-disponibles presas in-cone 4 depredador-angulo-de-vision
+  let presas turtles with [color = green or color = violet]  ; todas las presas
+  let presas-disponibles presas in-cone 4 depredador-angulo-de-vision  ; presas dentro del cono de visión
   let comida nobody  ; posible comida
   ask presas-disponibles [
     if not any? presas in-radius 1 [
@@ -94,14 +95,17 @@ end
 to mueve-depredadores
   ask depredadores [
     let objetivo potencial-comida
-    if objetivo != nobody [
+    ifelse objetivo != nobody [  ;encuentra comida
       face objetivo
-      fd paso-depredador
-      if distance objetivo < depredador-considera-cerca [
+      if distance objetivo < depredador-considera-cerca [  ; si la alcanzó, se la come
         ask objetivo [
           die  ; se lo come
         ]
       ]
+      fd paso-depredador
+    ][ ; objetivo no encontrado, sigue buscando
+      set heading heading - (depredador-angulo-de-vision / 2) + random-float depredador-angulo-de-vision
+      fd paso-depredador
     ]
   ]
 end
@@ -224,11 +228,16 @@ NIL
 @#$#@#$#@
 ## WHAT IS IT?
 
-(a general understanding of what the model is trying to show or explain)
+Version avanzada de presa-depredador incluyendo dos tipos de presas: rápidas (verdes) y lentas (violeta).
 
 ## HOW IT WORKS
 
-(what rules the agents use to create the overall behavior of the model)
+Tanto presas como depredadores tienen un ángulo y distancia de visión, para detectar a sus compañeras, al depredador o este a su posible comida.
+Las presas lentas se juntan al detectar a un depredador. 
+Las presas rápidas huyen al detectar al depredador.
+El depredador sólo ataca presas solitarias.
+Si depredador detecta una presa solitaria, la persigue, y si está a una distancia que considere cercana, se la come.
+
 
 ## HOW TO USE IT
 
