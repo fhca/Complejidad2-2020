@@ -4,6 +4,10 @@ breed [presas-rapidas presa-rapida]
 globals [
   rapidas-angulo-de-vision
   lentas-angulo-de-vision
+  depredador-angulo-de-vision
+  presa-considera-cerca
+  paso-depredador
+  depredador-considera-cerca
 ]
 
 
@@ -15,6 +19,9 @@ to setup
   set rapidas-angulo-de-vision 90
   set lentas-angulo-de-vision 170
   set depredador-angulo-de-vision 70
+  set presa-considera-cerca 2
+  set depredador-considera-cerca 1
+  set paso-depredador 2
   crea-presas
   crea-depredadores
   reset-ticks
@@ -52,28 +59,46 @@ end
 
 to presa-detecta-depredador
   ask presas-lentas [
-    if any? depredadores in-cone 2 lentas-angulo-de-vision [
+    if any? depredadores in-cone presa-considera-cerca lentas-angulo-de-vision [
       presas-lentas-se-juntan
     ]
   ]
   ask presas-rapidas [
-    if any? depredadores in-cone 2 rapidas-angulo-de-vision [
+    if any? depredadores in-cone presa-considera-cerca rapidas-angulo-de-vision [
       presas-rapidas-huyen
     ]
   ]
 end
 
 to presas-lentas-se-juntan
-  ;lo estan trabajando Luis, Francisco, Carlos Javier
+  ;lo estan trabajando Luis, Francisco, Carlos Javier, Noe
 end
 
 to presas-rapidas-huyen
   ;lo estan trabajando Anel, Javier, Mauricio, Dalila, Toño
 end
 
+to-report potencial-comida
+  ;devuelve una presa detectada por ESTE depredador en su cono de vision que esté "solitaria"
+  let presas turtles with [color = green or color = violet]
+  let presas-disponibles presas in-cone 4 depredador-angulo-de-vision
+  ask presas-disponibles [
+    if not any? presas in-radius 1 [
+      report self  ; está solitaria y la reporta
+    ]
+  ]
+  report nobody
+end
+
 to mueve-depredadores
   ask depredadores [
-    i
+    let objetivo potencial-comida
+    face objetivo
+    fd paso-depredador
+    if distance objetivo < depredador-considera-cerca [
+      ask objetivo [
+        die
+      ]
   ]
 end
 
