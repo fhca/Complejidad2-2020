@@ -23,9 +23,9 @@ for n in pos:
 p = nx.single_source_shortest_path_length(G, ncenter)
 
 plt.figure(figsize=(8, 8))
-nx.draw_networkx_edges(G, pos, nodelist=[ncenter], alpha=0.4)
-nx.draw_networkx_nodes(G, pos, nodelist=p.keys(),
-                       node_size=80)
+nx.draw_networkx_edges(G, pos,alpha=0.4)
+nx.draw_networkx_nodes(G, pos, nodelist=[ncenter], alpha=0.4, node_color='green')
+nx.draw_networkx_nodes(G, pos, nodelist=p.keys(), node_size=80)
 
 plt.xlim(-0.05, 1.05)
 plt.ylim(-0.05, 1.05)
