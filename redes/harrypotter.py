@@ -17,19 +17,20 @@ removed.extend(preposiciones)
 removed.extend(articulos)
 
 
-def splitting(filename):
+def splitting(filename: str) -> None:
     fd = open(filename, 'r')
     words = re.compile(r'\W')
     dots = re.compile(r'\.')
     start = True
     for line in fd:
         for phrase in dots.split(line):
-            phrase_list = list(filter(''.__ne__, words.split(phrase)))
+            phrase_list = list(filter(''.__ne__, words.split(phrase)))  # borra palabras vacías
             if phrase_list and start:
                 yield [x.lower() for x in phrase_list]
+                # devuelve ['harry', 'potter', 'y', ...] de cada frase
 
 
-def palabras_consecutivas(filename):
+def palabras_consecutivas(filename: str):
     G = nx.DiGraph()
     for phrase in splitting(filename):
         for a, b in zip(phrase, phrase[1:]):
